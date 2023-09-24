@@ -1,0 +1,52 @@
+﻿@page "/Employee/List"
+
+@inject HttpClient httpClient;
+
+<MudCard Elevation="25" Class="mx-auto" Style="width:130vh;">
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h2">Employee List</MudText>
+		</CardHeaderContent>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudDataGrid MultiSelection="true" Items="@employeeList" SortMode="SortMode.Multiple" Filterable="true"
+					 Hideable="true" EditMode="@(DataGridEditMode.Form)" EditTrigger="@DataGridEditTrigger.Manual">
+
+			<ToolBarContent>
+				
+				<MudSpacer />
+				@* <MudTextField Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+							  AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Small" Class=" mt-0"></MudTextField> *@
+			</ToolBarContent>
+			<Columns>
+				
+				<PropertyColumn  Property="x => x.Id " Title="Employee Id" Sortable="false" Filterable="false" IsEditable="false" />
+				<PropertyColumn Property="x => x.DisplayName " Title="Display Name" Sortable="false" Filterable="false" />
+				<PropertyColumn Property="x => x.ContactNo" Title="Contact Number" Sortable="false" Filterable="false" />
+				<PropertyColumn Property="x => x.Email" Title="Email" Sortable="false" Filterable="false" CellStyle="text-wrap-cell" />
+				<PropertyColumn Hidden="true" Property="x => x.UserId" Title="UserId" Sortable="false" Filterable="false" />
+				<TemplateColumn CellClass=" justify-end" Sortable="false" Filterable="false">
+					<CellTemplate>
+						<MudTooltip Text="View">
+							<MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.RemoveRedEye" Color="Color.Primary" />
+						</MudTooltip>
+					</CellTemplate>
+				</TemplateColumn>
+				<TemplateColumn  CellClass=" justify-end" >
+					<CellTemplate>
+						<MudStack Row>
+							<a href="#appraisal-form">	</a>
+						</MudStack>
+					</CellTemplate>
+				</TemplateColumn>
+			</Columns>
+		</MudDataGrid>
+	</MudCardContent>
+</MudCard>
+<MudScrollToTop>
+	<MudFab Color="Color.Tertiary" Icon="@Icons.Material.Filled.ArrowCircleUp" />
+</MudScrollToTop>
+
+@code {
+
+}

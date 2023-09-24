@@ -1,0 +1,89 @@
+﻿@page "/Employee"
+@page "/Employee/{Id}"
+
+@inject HttpClient httpClient;
+
+@using MudBlazor
+
+<div class="container-fluid">
+    @if (ShowSpinner)
+    {
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    }
+    else
+    {
+
+
+
+
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">Add Employee</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <EditForm Model="EmployeeData" Context="AD">
+                    <DataAnnotationsValidator />
+                    <div class="row">
+
+                        <div class="col-4">
+                            <MudTextField @bind-Value="EmployeeData.FirstName" Label="First Name" Variant="Variant.Text" Required="true"></MudTextField>
+                            <ValidationMessage For="@(() => EmployeeData.FirstName)" />
+                        </div>
+                        <div class="col-4">
+                            <MudTextField @bind-Value="EmployeeData.MiddleName" Label="Middle Name" Variant="Variant.Text"></MudTextField>
+
+                        </div>
+                        <div class="col-4">
+                            <MudTextField @bind-Value="EmployeeData.LastName" Label="Last Name" Variant="Variant.Text" Required="true"></MudTextField>
+                            <ValidationMessage For="@(() => EmployeeData.LastName)" />
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-4">
+                            <MudTextField Disabled="true" @bind-Value="EmployeeData.DisplayName" Label="Display Name" Variant="Variant.Text"></MudTextField>
+
+
+                        </div>
+                        <div class="col-4">
+                            <MudTextField @bind-Value="EmployeeData.Email" Label="Email" Variant="Variant.Text" Required="true"></MudTextField>
+                            <ValidationMessage For="@(() => EmployeeData.Email)" />
+
+                        </div>
+                        <div class="col-4">
+                            <MudNumericField HideSpinButtons="true" @bind-Value="EmployeeData.ContactNo" Label="Contact Number" Variant="Variant.Text" Required="true"></MudNumericField>
+                            <ValidationMessage For="@(() => EmployeeData.ContactNo)" />
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <MudTextField @bind-Value="EmployeeData.Address" Label="Complete Address" Variant="Variant.Outlined" Lines="4" />
+
+
+                        </div>
+                    </div>
+
+                    <br />
+                    <div style="text-align:left">
+                        <MudCardActions>
+                            <MudButton Variant="Variant.Filled" OnClick="(()=>Save(AD))" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save" Size="Size.Small" id="btnSendInvite" style="margin-right: 10px">Save</MudButton>
+
+                            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Close" OnClick="@(()=>Clear())" Size="Size.Small" id="btnCancel">Cancel</MudButton>
+
+                        </MudCardActions>
+                    </div>
+                </EditForm>
+            </MudCardContent>
+        </MudCard>
+    }
+</div>
+<MudScrollToTop>
+    <MudFab Color="Color.Tertiary" Icon="@Icons.Material.Filled.ArrowCircleUp" />
+</MudScrollToTop>
+
